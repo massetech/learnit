@@ -1,0 +1,43 @@
+<h2>Show item</h2>
+
+<ul>
+
+  <li>
+    <strong>Topic:</strong>
+    <%= @item.topic_id %>
+  </li>
+
+  <li>
+    <strong>level:</strong>
+    <%= @item.level %>
+  </li>
+
+  <li>
+    <strong>Dim0:</strong>
+    <%= @item.dim0 %>
+  </li>
+
+  <li>
+    <strong>Dim1:</strong>
+    <%= @item.dim1 %>
+  </li>
+
+  <li>
+    <strong>Dim2:</strong>
+    <%= @item.dim2 %>
+  </li>
+
+  <li>
+    <strong>Dim3:</strong>
+    <%= @item.dim3 %>
+  </li>
+
+  <li>
+    <strong>Dim4:</strong>
+    <%= @item.dim4 %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: item_path(@conn, :edit, @item) %>
+<%= link "Back", to: item_path(@conn, :index) %>

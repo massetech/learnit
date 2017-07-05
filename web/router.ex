@@ -17,8 +17,14 @@ defmodule Learnit.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
     resources "/classrooms", ClassroomController
-    get "/train", MainController, :train
+    resources "/topics", TopicController
+    resources "/items", ItemController
+
+    scope "/user", User do
+      get "/train", UserController, :train
+    end
   end
 
   # Other scopes may use custom stacks.

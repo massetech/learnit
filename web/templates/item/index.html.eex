@@ -1,0 +1,38 @@
+<h2>Listing items</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>level</th>
+      <th>Dim0</th>
+      <th>Dim1</th>
+      <th>Dim2</th>
+      <th>Dim3</th>
+      <th>Dim4</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for item <- @items do %>
+    <tr>
+      <td><%= item.topic_id %></td>
+      <td><%= item.level %></td>
+      <td><%= item.dim0 %></td>
+      <td><%= item.dim1 %></td>
+      <td><%= item.dim2 %></td>
+      <td><%= item.dim3 %></td>
+      <td><%= item.dim4 %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: item_path(@conn, :show, item), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: item_path(@conn, :edit, item), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: item_path(@conn, :delete, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New item", to: item_path(@conn, :new) %>
