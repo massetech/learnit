@@ -1,0 +1,13 @@
+<h2>Show classroom</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @classroom.title %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: classroom_path(@conn, :edit, @classroom) %>
+<%= link "Back", to: classroom_path(@conn, :index) %>
