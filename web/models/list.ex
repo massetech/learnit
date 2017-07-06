@@ -4,7 +4,7 @@ defmodule Learnit.List do
   schema "lists" do
     belongs_to :user, Learnit.User
     belongs_to :topic, Learnit.Topic
-
+    has_many :items, Learnit.Item
     timestamps()
   end
 

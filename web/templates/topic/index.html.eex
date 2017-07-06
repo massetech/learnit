@@ -12,7 +12,7 @@
   <tbody>
 <%= for topic <- @topics do %>
     <tr>
-      <td><%= topic.classroom_id %></td>
+      <td><%= topic.classroom.title %></td>
       <td><%= topic.title %></td>
 
       <td class="text-right">

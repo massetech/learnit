@@ -4,7 +4,7 @@ defmodule Learnit.Topic do
   schema "topics" do
     field :title, :string
     belongs_to :classroom, Learnit.Classroom
-
+    has_many :lists, Learnit.List
     timestamps()
   end
 
@@ -13,7 +13,8 @@ defmodule Learnit.Topic do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title])
+    |> cast(params, [:title, :classroom_id])
+    |> foreign_key_constraint(:classroom_id)
     |> validate_required([:title])
   end
 end
