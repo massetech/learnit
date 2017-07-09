@@ -4,6 +4,7 @@ defmodule Learnit.Classroom do
   schema "classrooms" do
     field :title, :string
     has_many :topics, Learnit.Classroom
+    has_many :lists, Learnit.List
     timestamps()
   end
 

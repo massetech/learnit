@@ -1,12 +1,9 @@
 defmodule Learnit.TopicController do
   use Learnit.Web, :controller
-  plug :load_selects
-  #require Logger
-  #Logger.debug "Var topics: #{inspect(topics)}"
-  #Logger.info  "Logging this text!"
-
+  require Logger
   alias Learnit.Topic
   alias Learnit.Classroom
+  plug :load_selects
 
   def index(conn, _params) do
     topics =
@@ -38,6 +35,7 @@ defmodule Learnit.TopicController do
     topic = Repo.get!(Topic, id)
       |> Repo.preload(:classroom)
     render(conn, "show.html", topic: topic)
+    #Logger.debug "Var topic: #{inspect(topic)}"
   end
 
   def edit(conn, %{"id" => id}) do

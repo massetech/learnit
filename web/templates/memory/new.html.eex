@@ -1,0 +1,6 @@
+<h2>New memory</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: memory_path(@conn, :create) %>
+
+<%= link "Back", to: memory_path(@conn, :index) %>

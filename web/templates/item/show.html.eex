@@ -3,8 +3,13 @@
 <ul>
 
   <li>
+    <strong>Classroom:</strong>
+    <%= @item.topic.classroom.title %>
+  </li>
+
+  <li>
     <strong>Topic:</strong>
-    <%= @item.topic_id %>
+    <%= @item.topic.title %>
   </li>
 
   <li>

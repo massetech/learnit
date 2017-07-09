@@ -1,10 +1,15 @@
 defmodule Learnit.ListController do
   use Learnit.Web, :controller
-
+  require Logger
   alias Learnit.List
+  alias Learnit.Classroom
+  plug :load_selects
 
   def index(conn, _params) do
-    lists = Repo.all(List)
+    lists =
+      List
+      |> Repo.all()
+      |> Repo.preload(:classroom)
     render(conn, "index.html", lists: lists)
   end
 
@@ -28,6 +33,7 @@ defmodule Learnit.ListController do
 
   def show(conn, %{"id" => id}) do
     list = Repo.get!(List, id)
+      |> Repo.preload(:classroom)
     render(conn, "show.html", list: list)
   end
 
@@ -61,5 +67,10 @@ defmodule Learnit.ListController do
     conn
     |> put_flash(:info, "List deleted successfully.")
     |> redirect(to: list_path(conn, :index))
+  end
+
+  defp load_selects(conn, _params) do
+    # Assigns selects functions associated from repo
+    assign(conn, :classrooms, Repo.all(from(c in Classroom, select: {c.title, c.id})))
   end
 end

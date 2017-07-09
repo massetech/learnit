@@ -31,6 +31,7 @@ defmodule Learnit.Router do
     resources "/topics", TopicController
     resources "/items", ItemController
     resources "/lists", ListController
+    resources "/memories", MemoryController
   end
 
   scope "/" do

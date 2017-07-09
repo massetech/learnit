@@ -12,8 +12,7 @@
   <tbody>
 <%= for list <- @lists do %>
     <tr>
-      <td><%= list.user_id %></td>
-      <td><%= list.topic_id %></td>
+      <td><%= list.classroom.title %></td>
 
       <td class="text-right">
         <%= link "Show", to: list_path(@conn, :show, list), class: "btn btn-default btn-xs" %>

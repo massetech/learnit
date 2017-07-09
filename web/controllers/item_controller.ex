@@ -1,10 +1,18 @@
 defmodule Learnit.ItemController do
   use Learnit.Web, :controller
-
+  require Logger
   alias Learnit.Item
+  alias Learnit.Topic
+  alias Learnit.Classroom
+  plug :load_selects
 
   def index(conn, _params) do
-    items = Repo.all(Item)
+    items =
+      Item
+      |> Repo.all()
+      |> Repo.preload(:topic)
+      |> Repo.preload(topic: :classroom)
+    Logger.debug "Var items: #{inspect(items)}"
     render(conn, "index.html", items: items)
   end
 
@@ -28,7 +36,10 @@ defmodule Learnit.ItemController do
 
   def show(conn, %{"id" => id}) do
     item = Repo.get!(Item, id)
+      |> Repo.preload(:topic)
+      |> Repo.preload(topic: :classroom)
     render(conn, "show.html", item: item)
+    Logger.debug "Var item: #{inspect(item)}"
   end
 
   def edit(conn, %{"id" => id}) do
@@ -61,5 +72,10 @@ defmodule Learnit.ItemController do
     conn
     |> put_flash(:info, "Item deleted successfully.")
     |> redirect(to: item_path(conn, :index))
+  end
+
+  defp load_selects(conn, _params) do
+    # Assigns selects functions associated from repo
+    assign(conn, :topics, Repo.all(from(c in Topic, select: {c.title, c.id})))
   end
 end

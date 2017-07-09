@@ -9,7 +9,7 @@ defmodule Learnit.Item do
     field :dim3, :string
     field :dim4, :string
     belongs_to :topic, Learnit.Topic
-
+    has_many :itemlists, Learnit.Itemlist
     timestamps()
   end
 
@@ -18,7 +18,8 @@ defmodule Learnit.Item do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:level, :dim0, :dim1, :dim2, :dim3, :dim4])
+    |> cast(params, [:level, :dim0, :dim1, :dim2, :dim3, :dim4, :topic_id])
+    |> foreign_key_constraint(:topic_id)
     |> validate_required([:level, :dim0, :dim1, :dim2, :dim3, :dim4])
   end
 end

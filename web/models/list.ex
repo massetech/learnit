@@ -2,9 +2,9 @@ defmodule Learnit.List do
   use Learnit.Web, :model
 
   schema "lists" do
-    belongs_to :user, Learnit.User
-    belongs_to :topic, Learnit.Topic
-    has_many :items, Learnit.Item
+    field :title, :string
+    belongs_to :classroom, Learnit.Classroom
+    has_many :itemlists, Learnit.Itemlist
     timestamps()
   end
 
@@ -13,7 +13,8 @@ defmodule Learnit.List do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [])
-    |> validate_required([])
+    |> cast(params, [:title, :classroom_id])
+    |> foreign_key_constraint(:classroom_id)
+    |> validate_required([:title])
   end
 end

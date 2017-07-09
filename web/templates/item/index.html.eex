@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Classroom</th>
       <th>Topic</th>
       <th>level</th>
       <th>Dim0</th>
@@ -17,7 +18,8 @@
   <tbody>
 <%= for item <- @items do %>
     <tr>
-      <td><%= item.topic_id %></td>
+      <td><%= item.topic.classroom.title %></td>
+      <td><%= item.topic.title %></td>
       <td><%= item.level %></td>
       <td><%= item.dim0 %></td>
       <td><%= item.dim1 %></td>
