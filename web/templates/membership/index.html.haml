@@ -1,0 +1,8 @@
+%h2= Coherence.current_user(@conn).email
+%h4= "This is your memberships..."
+
+=# link "New membership", to: membership_path(@conn, :new)
+
+- for membership <- @memberships do
+  %h4= membership.list_id
+  = link "Delete", to: membership_path(@conn, :delete, membership), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"

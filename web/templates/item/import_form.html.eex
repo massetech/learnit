@@ -1,0 +1,11 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <div class="form-group">
+    <%= label f, :file, class: "control-label" %>
+    <%= file_input f, :file %>
+  </div>
+  <%= select f, :topic_id, @topics %>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

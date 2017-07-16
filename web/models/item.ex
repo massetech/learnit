@@ -10,6 +10,8 @@ defmodule Learnit.Item do
     field :dim4, :string
     belongs_to :topic, Learnit.Topic
     has_many :itemlists, Learnit.Itemlist
+    many_to_many :lists, Learnit.List, join_through: Learnit.Itemlist
+    has_many :memories, Learnit.Memory
     timestamps()
   end
 

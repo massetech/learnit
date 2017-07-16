@@ -10,6 +10,7 @@ defmodule Learnit.Repo.Migrations.CreateItemlist do
     end
     create index(:itemlists, [:item_id])
     create index(:itemlists, [:list_id])
+    create index(:itemlists, [:item_id, :list_id], unique: true)
 
   end
 end

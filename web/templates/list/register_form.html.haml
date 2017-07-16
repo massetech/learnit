@@ -1,0 +1,6 @@
+- form_for @changeset, @action, fn f ->
+  .fields
+    = hidden_input f, :list_id, value: @list_id
+    = hidden_input f, :user_id, value: Coherence.current_user(@conn).id
+  .form-group
+    = submit "Learn", class: "btn btn-primary btn-xs"

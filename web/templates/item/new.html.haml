@@ -1,0 +1,5 @@
+%h2= "Nex item"
+
+= render "form.html", changeset: @changeset, topics: @topics, action: item_path(@conn, :create)
+
+= link "Back", to: item_path(@conn, :index)

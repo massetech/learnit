@@ -1,0 +1,33 @@
+%h2= "Listing items"
+= link "New item", to: item_path(@conn, :new)
+= render "import_form.html", action: import_csv_path(@conn, :import), changeset: @changeset, topics: @topics
+
+%table.table
+  %thead
+    %tr
+      %th= "Classroom"
+      %th= "Topic"
+      %th= "Nb lists"
+      %th= "level"
+      %th= "Dim0"
+      %th= "Dim1"
+      %th= "Dim2"
+      %th= "Dim3"
+      %th= "Dim4"
+
+  = for item <- @items do
+    %tr
+      %td= item.topic.classroom.title
+      %td= item.topic.title
+      %td= Enum.count(item.lists)
+      %td= item.level
+      %td= link item.dim0, to: item_path(@conn, :show, item.id)
+      %td= item.dim1
+      %td= item.dim2
+      %td= item.dim3
+      %td= item.dim4
+
+      %td.text-right
+        = link "Show", to: item_path(@conn, :show, item), class: "btn btn-default btn-xs"
+        = link "Edit", to: item_path(@conn, :edit, item), class: "btn btn-default btn-xs"
+        = link "Delete", to: item_path(@conn, :delete, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"

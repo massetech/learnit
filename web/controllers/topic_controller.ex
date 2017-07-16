@@ -1,8 +1,6 @@
 defmodule Learnit.TopicController do
   use Learnit.Web, :controller
-  require Logger
-  alias Learnit.Topic
-  alias Learnit.Classroom
+  alias Learnit.{Topic, Classroom}
   plug :load_selects
 
   def index(conn, _params) do

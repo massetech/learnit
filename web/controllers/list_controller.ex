@@ -1,16 +1,18 @@
 defmodule Learnit.ListController do
   use Learnit.Web, :controller
-  require Logger
-  alias Learnit.List
-  alias Learnit.Classroom
-  plug :load_selects
+  alias Learnit.{List, Classroom, AssociateList, User, Membership, Item, Topic, Itemlist}
+  plug :load_selects when action in [:new, :edit]
 
   def index(conn, _params) do
+    user_id = Coherence.current_user(conn).id
+    query = from u in Learnit.User, where: u.id == ^user_id
     lists =
       List
       |> Repo.all()
-      |> Repo.preload(:classroom)
-    render(conn, "index.html", lists: lists)
+      |> Repo.preload([:classroom, :memberships, :items, users: query])
+      |> IO.inspect()
+    changeset = Membership.changeset(%Membership{})
+    render(conn, "index.html", lists: lists, changeset: changeset)
   end
 
   def new(conn, _params) do
@@ -32,8 +34,13 @@ defmodule Learnit.ListController do
   end
 
   def show(conn, %{"id" => id}) do
-    list = Repo.get!(List, id)
-      |> Repo.preload(:classroom)
+    #changeset = AssociateList.changeset(%AssociateList{})
+    #redirect conn, to: list_path(conn, :index)
+    list = List
+      |> query_items(id)
+      |> Repo.get(id)
+      |> Repo.preload([:classroom, :users])
+      |> IO.inspect()
     render(conn, "show.html", list: list)
   end
 
@@ -72,5 +79,21 @@ defmodule Learnit.ListController do
   defp load_selects(conn, _params) do
     # Assigns selects functions associated from repo
     assign(conn, :classrooms, Repo.all(from(c in Classroom, select: {c.title, c.id})))
+  end
+
+  defp query_items(_, id) do
+    # Check that there is at least one item linked to the list
+    case Repo.get_by(Itemlist, list_id: id) do
+      nil ->
+        from l in List,
+        preload: [:items]
+      _ ->
+        # Load query to get items and itemlists of the list
+        from l in List,
+        join: i in assoc(l, :items),
+        join: il in assoc(l, :itemlists), on: il.list_id == l.id,
+        where: i.id == il.item_id,
+        preload: [items: {i, itemlists: il}]
+    end
   end
 end

@@ -9,6 +9,10 @@ use Mix.Config
 config :learnit,
   ecto_repos: [Learnit.Repo]
 
+# Added to manage HAML
+config :phoenix, :template_engines,
+  haml: PhoenixHaml.Engine
+
 # Configures the endpoint
 config :learnit, Learnit.Endpoint,
   url: [host: "localhost"],

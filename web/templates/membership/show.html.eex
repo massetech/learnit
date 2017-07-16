@@ -1,0 +1,18 @@
+<h2>Show membership</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @membership.user_id %>
+  </li>
+
+  <li>
+    <strong>List:</strong>
+    <%= @membership.list_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: membership_path(@conn, :edit, @membership) %>
+<%= link "Back", to: membership_path(@conn, :index) %>

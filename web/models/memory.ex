@@ -3,8 +3,8 @@ defmodule Learnit.Memory do
 
   schema "memories" do
     field :status, :string
-    belongs_to :user, Learnit.User
-    belongs_to :itemlist, Learnit.Itemlist
+    belongs_to :membership, Learnit.Membership
+    belongs_to :item, Learnit.Item
 
     timestamps()
   end
@@ -14,7 +14,9 @@ defmodule Learnit.Memory do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:status])
-    |> validate_required([:status])
+    |> cast(params, [:status, :membership_id, :item_id])
+    |> foreign_key_constraint([:membership_id, :item_id])
+    |> unique_constraint(:membership_id_item_id) # Dont forget to put constraint on table too
+    |> validate_required([:membership_id, :item_id])
   end
 end
