@@ -5,6 +5,8 @@
     </div>
   <% end %>
 
+  <%= select f, :classroom_id, @classrooms %>
+
   <div class="form-group">
     <%= label f, :title, class: "control-label" %>
     <%= text_input f, :title, class: "form-control" %>
@@ -15,5 +17,4 @@
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 
-  <%= select f, :classroom_id, @classrooms %>
 <% end %>

@@ -1,7 +1,9 @@
-%h2= @list.classroom.title
+%h2
+  = "Classroom : "
+  = @list.classroom.title
 
 %h3
-  = "Show list : "
+  = "List : "
   = @list.title
 %h5
   = "There are "
@@ -9,7 +11,6 @@
   = " users learning this list..."
 
 
-= link "Edit", to: list_path(@conn, :edit, @list)
 = link "Back", to: list_path(@conn, :index)
 
 %hr

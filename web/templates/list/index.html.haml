@@ -4,10 +4,9 @@
 %table.table
   %thead
     %tr
-      %th= "Classroom"
+      %th= link "Classroom", to: classroom_path(@conn, :index)
       %th= "Title"
       %th= "Records"
-      %th= "Status"
 
   %tbody
     - for list <- @lists do

@@ -1,7 +1,7 @@
 defmodule Learnit.Memory do
   use Learnit.Web, :model
 
-  schema "memories" do
+  schema "memorys" do
     field :status, :string
     belongs_to :membership, Learnit.Membership
     belongs_to :item, Learnit.Item

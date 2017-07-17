@@ -1,0 +1,18 @@
+%h2= "Listing classrooms"
+= link "New classroom", to: classroom_path(@conn, :new)
+%table.table
+  %thead
+    %tr
+      %th= "Title"
+      %th= link "Topics", to: topic_path(@conn, :index)
+      %th= link "Lists", to: list_path(@conn, :index)
+  %tbody
+    - for classroom <- @classrooms do
+      %tr
+        %td= classroom.title
+        %td= Enum.count(classroom.topics)
+        %td= Enum.count(classroom.lists)
+        %td.text-right
+          =# link "Show", to: classroom_path(@conn, :show, classroom), class: "btn btn-default btn-xs"
+          = link "Edit", to: classroom_path(@conn, :edit, classroom), class: "btn btn-default btn-xs"
+          = link "Delete", to: classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"

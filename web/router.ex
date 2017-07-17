@@ -35,7 +35,7 @@ defmodule Learnit.Router do
     resources "/lists", ListController
     resources "/memberships", MembershipController, only: [:create, :delete]
     resources "/itemlists", ItemlistController, only: [:create, :delete]
-    resources "/memories", MemoryController
+    resources "/memorys", MemoryController
   end
 
   scope "/" do

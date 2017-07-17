@@ -20,7 +20,8 @@ defmodule Learnit.List do
     |> cast(params, [:title, :classroom_id])
     |> foreign_key_constraint(:classroom_id)
     |> validate_required([:title])
-    |> cast_assoc(:itemlists, required: true)
+    |> cast_assoc(:itemlists)
+    #|> cast_assoc(:itemlists, required: true)
   end
 
   # def registered() do

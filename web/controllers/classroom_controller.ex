@@ -1,10 +1,13 @@
 defmodule Learnit.ClassroomController do
   use Learnit.Web, :controller
-
-  alias Learnit.Classroom
+  alias Learnit.{Classroom, Topic, List}
 
   def index(conn, _params) do
-    classrooms = Repo.all(Classroom)
+    classrooms =
+      Classroom
+      |> Repo.all()
+      |> Repo.preload([:lists, :topics]) # [:topics, :lists]
+      |> IO.inspect()
     render(conn, "index.html", classrooms: classrooms)
   end
 
@@ -22,7 +25,10 @@ defmodule Learnit.ClassroomController do
         |> put_flash(:info, "Classroom created successfully.")
         |> redirect(to: classroom_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        #render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:alert, "Classroom was not created.")
+        |> redirect(to: classroom_path(conn, :index))
     end
   end
 
@@ -45,9 +51,12 @@ defmodule Learnit.ClassroomController do
       {:ok, classroom} ->
         conn
         |> put_flash(:info, "Classroom updated successfully.")
-        |> redirect(to: classroom_path(conn, :show, classroom))
+        |> redirect(to: classroom_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "edit.html", classroom: classroom, changeset: changeset)
+        #render(conn, "edit.html", classroom: classroom, changeset: changeset)
+        conn
+        |> put_flash(:alert, "Classroom was not updated.")
+        |> redirect(to: classroom_path(conn, :index))
     end
   end
 

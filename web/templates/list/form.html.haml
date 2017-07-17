@@ -1,0 +1,23 @@
+- form_for @changeset, @action, fn f ->
+  - if @changeset.action do
+    .alert.alert-danger
+      %p= "Oops, something went wrong! Please check the errors below."
+
+  .form-group
+    = label f, :classroom_id, class: "control-label"
+    = select f, :classroom_id, @classrooms
+
+  .form-group
+    = label f, :title, class: "control-label"
+    = text_input f, :title, class: "form-control"
+    = error_tag f, :title
+
+  .form-group
+    = submit "Submit", class: "btn btn-primary"
+
+-# - form_for @changeset, @action, fn f ->
+-#   .fields
+-#     = hidden_input f, :item_id, value: @item.id
+-#     = select f, :list_id, @lists
+-#   .form-group
+-#     = submit "Add", class: "btn btn-primary btn-xs"

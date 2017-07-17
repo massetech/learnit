@@ -25,7 +25,10 @@ defmodule Learnit.TopicController do
         |> put_flash(:info, "Topic created successfully.")
         |> redirect(to: topic_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        #render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:alert, "Topic was not created.")
+        |> redirect(to: topic_path(conn, :index))
     end
   end
 
@@ -51,9 +54,12 @@ defmodule Learnit.TopicController do
       {:ok, topic} ->
         conn
         |> put_flash(:info, "Topic updated successfully.")
-        |> redirect(to: topic_path(conn, :show, topic))
+        |> redirect(to: topic_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "edit.html", topic: topic, changeset: changeset)
+        #render(conn, "edit.html", topic: topic, changeset: changeset)
+        conn
+        |> put_flash(:alert, "Topic was not updated.")
+        |> redirect(to: topic_path(conn, :index))
     end
   end
 

@@ -29,7 +29,10 @@ defmodule Learnit.ListController do
         |> put_flash(:info, "List created successfully.")
         |> redirect(to: list_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        #render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:alert, "List was not created.")
+        |> redirect(to: list_path(conn, :index))
     end
   end
 
