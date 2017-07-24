@@ -10,7 +10,7 @@ defmodule Learnit.ListController do
       List
       |> Repo.all()
       |> Repo.preload([:classroom, :memberships, :items, users: query])
-      |> IO.inspect()
+      #|> IO.inspect()
     changeset = Membership.changeset(%Membership{})
     render(conn, "index.html", lists: lists, changeset: changeset)
   end
@@ -89,6 +89,7 @@ defmodule Learnit.ListController do
     case Repo.get_by(Itemlist, list_id: id) do
       nil ->
         from l in List,
+        # If not itemlist then preload items normaly
         preload: [:items]
       _ ->
         # Load query to get items and itemlists of the list

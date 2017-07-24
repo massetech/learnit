@@ -7,6 +7,7 @@ defmodule Learnit.User do
     field :name, :string
     field :email, :string
     coherence_schema()
+    has_many :memberships, Learnit.Membership, on_delete: :delete_all
     many_to_many :lists, Learnit.List, join_through: Learnit.Membership
 
     timestamps()

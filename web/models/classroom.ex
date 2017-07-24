@@ -3,8 +3,8 @@ defmodule Learnit.Classroom do
 
   schema "classrooms" do
     field :title, :string
-    has_many :topics, Learnit.Topic
-    has_many :lists, Learnit.List
+    has_many :topics, Learnit.Topic, on_delete: :delete_all
+    has_many :lists, Learnit.List, on_delete: :delete_all
     timestamps()
   end
 

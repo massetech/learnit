@@ -11,7 +11,7 @@ defmodule Learnit.Item do
     belongs_to :topic, Learnit.Topic
     has_many :itemlists, Learnit.Itemlist
     many_to_many :lists, Learnit.List, join_through: Learnit.Itemlist
-    has_many :memories, Learnit.Memory
+    has_many :memorys, Learnit.Memory
     timestamps()
   end
 

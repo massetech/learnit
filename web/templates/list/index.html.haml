@@ -1,5 +1,9 @@
-%h2= "Available lists"
+%h2
+  = "Welcome "
+  = Coherence.current_user(@conn).email
+%h4= "Please choose your lists"
 = link "New list", to: list_path(@conn, :new)
+= link "See my lists", to: membership_path(@conn, :index)
 
 %table.table
   %thead
@@ -7,6 +11,8 @@
       %th= link "Classroom", to: classroom_path(@conn, :index)
       %th= "Title"
       %th= "Records"
+      %th= "Memberships"
+      %th= "Options"
 
   %tbody
     - for list <- @lists do
@@ -18,6 +24,10 @@
           %td= link "Remove", to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "btn btn-danger btn-xs"
         - else
           %td= render "register_form.html", changeset: @changeset, list_id: list.id, conn: @conn, action: membership_path(@conn, :create)
+        -# %td=
+        -#   .dim
+        -#     = checkbox :selected, list.id, value: note.title, checked: note.selected
+        -#     = note.title
         %td.text-right
           = link "Show", to: list_path(@conn, :show, list), class: "btn btn-default btn-xs"
           = link "Edit", to: list_path(@conn, :edit, list), class: "btn btn-default btn-xs"

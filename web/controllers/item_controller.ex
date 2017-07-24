@@ -88,11 +88,7 @@ defmodule Learnit.ItemController do
 
   def delete(conn, %{"id" => id}) do
     item = Repo.get!(Item, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(item)
-
     conn
     |> put_flash(:info, "Item deleted successfully.")
     |> redirect(to: item_path(conn, :index))

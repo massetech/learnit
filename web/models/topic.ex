@@ -4,7 +4,7 @@ defmodule Learnit.Topic do
   schema "topics" do
     field :title, :string
     belongs_to :classroom, Learnit.Classroom
-    has_many :items, Learnit.Item
+    has_many :items, Learnit.Item, on_delete: :delete_all
     timestamps()
   end
 

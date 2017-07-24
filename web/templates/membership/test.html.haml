@@ -1,0 +1,17 @@
+.top
+  .menu
+  .title
+    %h4= "All"
+    %h4= "Connected"
+  .quit
+    %h1= "X"
+.items
+  - for item <- @items do
+    .item
+      .question
+      .answers
+.bottom
+  %ul
+    %li.minus
+    %li.pass
+    %li.plus
