@@ -2,6 +2,7 @@ defmodule Learnit.MembershipController do
   use Learnit.Web, :controller
   alias Learnit.{Membership, Memory, List}
   require Logger
+  import PhoenixGon.Controller
 
   def index(conn, _params) do
     user_id = Coherence.current_user(conn).id
@@ -18,6 +19,7 @@ defmodule Learnit.MembershipController do
       |> Repo.get(id)
       |> Repo.preload([:memorys])
       #|> Map.get(:memorys) # Get the list of memorys
+      conn = put_gon(conn, controller: items)
       render(conn, "test.html", items: items)
   end
 

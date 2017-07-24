@@ -40,8 +40,9 @@ defmodule Learnit.Mixfile do
      {:cowboy, "~> 1.0"},
      {:coherence, "~> 0.3"},      # Devise
      {:csv, "~> 2.0.0"},          # Converts csvs
-     #{:phoenix_haml, "~> 0.2"}    # HAML
-     {:phoenix_haml, github: "chrismccord/phoenix_haml"}
+     {:phoenix_haml, github: "chrismccord/phoenix_haml"}, # HAML
+     {:phoenix_gon, "~> 0.2.0"}, # Loading variables in JS
+     {:rabbitElixir, "~> 1.0.0"} # Myanmar Zawgyi converter
    ]
   end
 

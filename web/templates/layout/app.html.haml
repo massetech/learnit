@@ -26,4 +26,5 @@
       %main(role="main")
         = render @view_module, @view_template, assigns
 
+    = render_gon_script(@conn)
     %script(src='#{static_path(@conn, "/js/app.js")}')

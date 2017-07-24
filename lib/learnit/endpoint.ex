@@ -38,5 +38,6 @@ defmodule Learnit.Endpoint do
     key: "_learnit_key",
     signing_salt: "l2YbskSZ"
 
+  plug PhoenixGon.Pipeline
   plug Learnit.Router
 end
