@@ -15,6 +15,6 @@ defmodule Learnit.Membership do
       struct
       |> cast(params, [:user_id, :list_id])
       |> validate_required([:user_id, :list_id])
-      |> cast_assoc(:memorys)
+      |> cast_assoc(:memorys, required: true)
     end
 end
