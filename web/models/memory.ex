@@ -12,11 +12,11 @@ defmodule Learnit.Memory do
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-    def changeset(struct, params \\ %{}) do
-      struct
-      |> cast(params, [:status, :membership_id, :item_id])
-      |> foreign_key_constraint([:membership_id, :item_id])
-      |> unique_constraint(:membership_id_item_id) # Dont forget to put constraint on table too
-      |> validate_required([:membership_id, :item_id])
-    end
+      def changeset(struct, params \\ %{}) do
+        struct
+        |> cast(params, [:status, :membership_id, :item_id])
+        #|> foreign_key_constraint([:membership_id, :item_id])  # Dont use that !
+        |> unique_constraint(:membership_id_item_id) # Dont forget to put constraint on table too
+        |> validate_required([:item_id]) # Cannot use :membership_id with cast_assoc
+      end
 end
