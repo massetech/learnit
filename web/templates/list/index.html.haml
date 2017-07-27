@@ -3,7 +3,7 @@
   = Coherence.current_user(@conn).email
 %h4= "Please choose your lists"
 = link "New list", to: list_path(@conn, :new)
-= link "See my lists", to: membership_path(@conn, :index)
+= link "See my lists", to: mylists_path(@conn, :index)
 
 %table.table
   %thead
@@ -11,7 +11,7 @@
       %th= link "Classroom", to: classroom_path(@conn, :index)
       %th= "Title"
       %th= "Records"
-      %th= "Memberships"
+      %th= "Lists"
       %th= "Options"
 
   %tbody

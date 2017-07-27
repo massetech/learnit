@@ -5,6 +5,7 @@ defmodule Learnit.Membership do
       belongs_to :user, Learnit.User
       belongs_to :list, Learnit.List
       has_many :memorys, Learnit.Memory, on_delete: :delete_all
+      many_to_many :items, Learnit.Item, join_through: Learnit.Memory
       timestamps()
     end
 

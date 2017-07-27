@@ -1,6 +1,6 @@
 defmodule Learnit.MembershipController do
   use Learnit.Web, :controller
-  alias Learnit.{Membership, Memory, List}
+  alias Learnit.{Membership, Memory, List, Item}
   require Logger
   import PhoenixGon.Controller
 
@@ -10,17 +10,19 @@ defmodule Learnit.MembershipController do
     memberships =
       query
       |> Repo.all
-      |> Repo.preload([:lists, :memorys])
+      |> Repo.preload([:list, :memorys])
     render(conn, "index.html", memberships: memberships)
   end
 
   def show(conn, %{"id" => id}) do
-    items = Membership
+    memorys = Membership
       |> Repo.get(id)
       |> Repo.preload([:memorys])
-      #|> Map.get(:memorys) # Get the list of memorys
-      conn = put_gon(conn, controller: items)
-      render(conn, "test.html", items: items)
+      |> Map.get(:memorys) # Get the list of memorys
+      |> Repo.preload([:item]) # Get the list of items
+      |> IO.inspect()
+      #conn = put_gon(conn, controller: items)
+      render(conn, "test.html", memorys: memorys)
   end
 
   # def new(conn, _params) do
@@ -42,7 +44,7 @@ defmodule Learnit.MembershipController do
       case Repo.insert(membership_with_memories) do
         {:ok, _} ->
           conn
-          |> put_flash(:info, "Membership created successfully.")
+          |> put_flash(:info, "Your list is now available.")
           |> redirect(to: list_path(conn, :index))
         {:error, membership_with_memories} ->
           Logger.debug("Membership : failed to save membership")
@@ -60,7 +62,7 @@ defmodule Learnit.MembershipController do
     membership = Repo.get!(Membership, id)
     Repo.delete!(membership)
     conn
-    |> put_flash(:info, "Membership deleted successfully.")
+    |> put_flash(:info, "The list has been removed.")
     |> redirect(to: list_path(conn, :index))
   end
 
