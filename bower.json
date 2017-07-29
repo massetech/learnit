@@ -2,7 +2,6 @@
   "name": "learnit",
   "dependencies": {
     "jquery": "~ 2.1",
-    "swiper": "^3.4.2",
-    "normalize-scss": "normalize.scss#^7.0.0"
+    "swiper": "^3.4.2"
   }
 }
