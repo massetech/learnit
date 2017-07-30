@@ -1,18 +1,51 @@
-%h2= "Listing classrooms"
-= link "New classroom", to: classroom_path(@conn, :new)
-%table.table
-  %thead
-    %tr
-      %th= "Title"
-      %th= link "Topics", to: topic_path(@conn, :index)
-      %th= link "Lists", to: list_path(@conn, :index)
-  %tbody
-    - for classroom <- @classrooms do
-      %tr
-        %td= classroom.title
-        %td= Enum.count(classroom.topics)
-        %td= Enum.count(classroom.lists)
-        %td.text-right
-          =# link "Show", to: classroom_path(@conn, :show, classroom), class: "btn btn-default btn-xs"
-          = link "Edit", to: classroom_path(@conn, :edit, classroom), class: "btn btn-default btn-xs"
-          = link "Delete", to: classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+-# render Learnit.LayoutView, "admin_links.html", conn: @conn
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Classrooms"
+          - link to: classroom_path(@conn, :new), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("plus-circle")
+            %span= "New classroom"
+        .column.is-8
+
+%section.hero
+  .hero-body
+    .container
+      .columns
+        .column.is-2
+        .column.is-8
+          %table.table
+            %thead
+              %tr
+                %th
+                  = "Title"
+                %th
+                  .content.has-text-centered= "Topics"
+                %th
+                  .content.has-text-centered= "Lists"
+                %th
+                  .content.has-text-centered= "Actions"
+            %tbody
+              - for classroom <- @classrooms do
+                %tr
+                  %td= classroom.title
+                  %td
+                    .content.has-text-centered= Enum.count(classroom.topics)
+                  %td
+                    .content.has-text-centered= Enum.count(classroom.lists)
+                  %td
+                    .field.is-grouped.fix-centered
+                      %p.control
+                        - link to: classroom_path(@conn, :edit, classroom), class: "button is-small is-outlined is-info" do
+                          %span.icon.is-small
+                            = fa_icon("pencil")
+                          %span= "Edit"
+                      %p.control
+                        - link to: classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"], class: "button is-small is-outlined is-danger" do
+                          %span.icon.is-small
+                            = fa_icon("trash")
+                          %span= "Delete"
+        .column.is-2

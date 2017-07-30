@@ -52,6 +52,7 @@ defmodule Learnit.Web do
       import Learnit.Router.Helpers
       import Learnit.ErrorHelpers
       import Learnit.Gettext
+      import FontAwesomePhoenix.HTML
     end
   end
 

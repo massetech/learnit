@@ -1,0 +1,26 @@
+%header
+  %nav.navbar.is-transparent.has-shadow
+    .navbar-brand
+      - link to: page_path(@conn, :index), class: "navbar-item" do
+        = img_tag static_path(@conn, "/images/logo-text.png")
+      .navbar-burger
+    .navbar-menu
+      .navbar-start
+        .navbar-item.has-dropdown.is-hoverable
+          .navbar-link= Coherence.current_user(@conn).email
+          .navbar-dropdown.is-boxed
+            = link "Admin", to: classroom_path(@conn, :index), class: "navbar-item"
+            = link "My lists", to: mylists_path(@conn, :index), class: "navbar-item"
+            %hr.navbar-divider
+            = link "Log out", to: page_path(@conn, :index), class: "navbar-item"
+        .navbar-item
+          = link "See the lists", to: list_path(@conn, :index)
+      .navbar-end
+        .navbar-item
+          = link "Classrooms", to: classroom_path(@conn, :index)
+        .navbar-item
+          = link "Topics", to: topic_path(@conn, :index)
+        .navbar-item
+          = link "Lists", to: list_path(@conn, :index)
+        .navbar-item
+          = link "Items", to: item_path(@conn, :index)

@@ -1,0 +1,20 @@
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Edit classroom"
+          - link to: classroom_path(@conn, :index), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("arrow-left")
+            %span= "Back to classrooms"
+        .column.is-8
+
+%section.hero
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-3
+        .column.is-6
+          = render "form.html", changeset: @changeset, action: classroom_path(@conn, :update, @classroom)
+        .column.is-3

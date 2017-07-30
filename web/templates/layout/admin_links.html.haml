@@ -1,0 +1,23 @@
+%nav.navbar
+  .container
+    .field.is-grouped
+      %p.control
+        - link to: classroom_path(@conn, :index), class: "button is-primary" do
+          %span.icon
+            %i.fa.fa-twitter
+          %span= "Classrooms"
+      %p.control
+        - link to: topic_path(@conn, :index), class: "button is-primary" do
+          %span.icon
+            %i.fa.fa-twitter
+          %span= "Topics"
+      %p.control
+        - link to: list_path(@conn, :index), class: "button is-primary" do
+          %span.icon
+            %i.fa.fa-github
+          %span= "Lists"
+      %p.control
+        - link to: item_path(@conn, :index), class: "button is-primary" do
+          %span.icon
+            %i.fa.fa-twitter
+          %span= "Items"

@@ -1,34 +1,4 @@
-.jumbotron
-  %h2= gettext "Welcome to %{name}", name: "Learnit!"
-  %p.lead= "An easy and productive method to memorize borring stuff..."
-
-.row.marketing
-  .col-lg-6
-    %h4= "Params"
-    %ul
-      %li= link "Classrooms", to: classroom_path(@conn, :index)
-      %li= link "Topics", to: topic_path(@conn, :index)
-      %li= link "Lists", to: list_path(@conn, :index)
-      %li= link "Items", to: item_path(@conn, :index)
-
-  .col-lg-6
-    %h4= "Views"
-    %ul
-      %li= link "Memory", to: memory_path(@conn, :index)
-      %li=# link "Connection", to: test_path(@conn, :index)
-
--#   <div class="col-lg-6">
--#     <h4>Help</h4>
--#     <ul>
--#       <li>
--#         <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
--#       </li>
--#       <li>
--#         <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
--#       </li>
--#       <li>
--#         <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
--#       </li>
--#     </ul>
--#   </div>
--# </div>
+.hero-body
+  .container.has-text-centered
+    %p.title.is-1= gettext "Welcome to %{name}", name: "Learnit!"
+    %p.subtitle.is-3= "An easy and productive method to memorize borring stuff..."
