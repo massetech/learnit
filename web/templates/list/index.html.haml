@@ -1,34 +1,76 @@
-%h2
-  = "Welcome "
-  = Coherence.current_user(@conn).email
-%h4= "Please choose your lists"
-= link "New list", to: list_path(@conn, :new)
-= link "See my lists", to: mylists_path(@conn, :index)
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Lists"
+          - link to: list_path(@conn, :new), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("plus-circle")
+            %span= "New list"
+        .column.is-8
 
-%table.table
-  %thead
-    %tr
-      %th= link "Classroom", to: classroom_path(@conn, :index)
-      %th= "Title"
-      %th= "Records"
-      %th= "Lists"
-      %th= "Options"
+%section.hero
+  .hero-body
+    .container
+      .columns
+        .column.is-2
+        .column.is-8
+          %table.table
+            %thead
+              %tr
+                %th
+                  .content.has-text-centered= "Classroom"
+                %th
+                  .content.has-text-centered= "Title"
+                %th
+                  .content.has-text-centered= "Items"
+                %th
+                  .content.has-text-centered= "My lists"
+                %th
+                  .content.has-text-centered= "Actions"
+            %tbody
+              - for list <- @lists do
+                %tr
 
-  %tbody
-    - for list <- @lists do
-      %tr
-        %td= list.classroom.title
-        %td= list.title
-        %td= Enum.count(list.items)
-        - if Enum.any?(list.users) do
-          %td= link "Remove", to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "btn btn-danger btn-xs"
-        - else
-          %td= render "register_form.html", changeset: @changeset, list_id: list.id, conn: @conn, action: membership_path(@conn, :create)
-        -# %td=
-        -#   .dim
-        -#     = checkbox :selected, list.id, value: note.title, checked: note.selected
-        -#     = note.title
-        %td.text-right
-          = link "Show", to: list_path(@conn, :show, list), class: "btn btn-default btn-xs"
-          = link "Edit", to: list_path(@conn, :edit, list), class: "btn btn-default btn-xs"
-          = link "Delete", to: list_path(@conn, :delete, list), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+                  %td
+                    .content.has-text-centered= list.classroom.title
+                  %td
+                    .content.has-text-centered= list.title
+                  %td
+                    .content.has-text-centered= Enum.count(list.items)
+                  %td
+                    .content.has-text-centered
+                      - if Enum.any?(list.users) do
+                        =# link "Remove", to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "btn btn-danger btn-xs"
+                        - link to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "button is-danger is-outlined is-small" do
+                          %span.icon.is-small
+                            = fa_icon("ban")
+                          %span= "Remove"
+                      - else
+                        = render "register_form.html", changeset: @changeset, list_id: list.id, conn: @conn, action: membership_path(@conn, :create)
+
+                  %td
+                    .field.is-grouped.fix-centered
+                      %p.control
+                        - link to: list_path(@conn, :show, list), class: "button is-small is-outlined is-primary" do
+                          %span.icon.is-small
+                            = fa_icon("eye")
+                          %span= "View"
+                      %p.control
+                        - link to: list_path(@conn, :edit, list), class: "button is-small is-outlined is-info" do
+                          %span.icon.is-small
+                            = fa_icon("pencil")
+                          %span= "Edit"
+                      %p.control
+                        - link to: list_item_path(@conn, :select, list), class: "button is-small is-outlined is-warning" do
+                          %span.icon.is-small
+                            = fa_icon("gear")
+                          %span= "Manage"
+                      %p.control
+                        - link to: list_path(@conn, :delete, list), method: :delete, data: [confirm: "Are you sure?"], class: "button is-small is-outlined is-danger" do
+                          %span.icon.is-small
+                            = fa_icon("trash")
+                          %span= "Delete"
+
+        .column.is-2

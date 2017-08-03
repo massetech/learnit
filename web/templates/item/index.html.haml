@@ -1,33 +1,78 @@
-%h2= "Listing items"
-= link "New item", to: item_path(@conn, :new)
-= render "import_form.html", action: import_csv_path(@conn, :import), changeset: @changeset, topics: @topics
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Items"
+          - link to: item_path(@conn, :new), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("plus-circle")
+            %span= "New item"
+        .column.is-8
 
-%table.table
-  %thead
-    %tr
-      %th= "Classroom"
-      %th= "Topic"
-      %th= "Nb lists"
-      %th= "level"
-      %th= "Dim0"
-      %th= "Dim1"
-      %th= "Dim2"
-      %th= "Dim3"
-      %th= "Dim4"
-
-  = for item <- @items do
-    %tr
-      %td= item.topic.classroom.title
-      %td= item.topic.title
-      %td= Enum.count(item.lists)
-      %td= item.level
-      %td= link item.dim0, to: item_path(@conn, :show, item.id)
-      %td= item.dim1
-      %td= item.dim2
-      %td= item.dim3
-      %td= item.dim4
-
-      %td.text-right
-        = link "Show", to: item_path(@conn, :show, item), class: "btn btn-default btn-xs"
-        = link "Edit", to: item_path(@conn, :edit, item), class: "btn btn-default btn-xs"
-        = link "Delete", to: item_path(@conn, :delete, item), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+%section.hero
+  .hero-body
+    .container
+      .columns
+        .column.is-12
+          %table.table
+            %thead
+              %tr
+                %th
+                  .content.has-text-centered= "Classroom"
+                %th
+                  .content.has-text-centered= "Topic"
+                %th
+                  .content.has-text-centered= "Nb lists"
+                %th
+                  .content.has-text-centered= "Level"
+                %th
+                  .content.has-text-centered= "Dim0"
+                %th
+                  .content.has-text-centered= "Dim1"
+                %th
+                  .content.has-text-centered= "Dim2"
+                %th
+                  .content.has-text-centered= "Dim3"
+                %th
+                  .content.has-text-centered= "Dim4"
+                %th
+                  .content.has-text-centered= "Actions"
+            %tbody
+              - for item <- @items do
+                %tr
+                  %td
+                    .content.has-text-centered= item.topic.classroom.title
+                  %td
+                    .content.has-text-centered= item.topic.title
+                  %td
+                    .content.has-text-centered= Enum.count(item.lists)
+                  %td
+                    .content.has-text-centered= item.level
+                  %td
+                    .content.has-text-centered= item.dim0
+                  %td
+                    .content.has-text-centered= item.dim1
+                  %td
+                    .content.has-text-centered= item.dim2
+                  %td
+                    .content.has-text-centered= item.dim3
+                  %td
+                    .content.has-text-centered= item.dim4
+                  %td
+                    .field.is-grouped.fix-centered
+                      -# %p.control
+                      -#   - link to: item_path(@conn, :show, item), class: "button is-small is-outlined" do
+                      -#     %span.icon.is-small
+                      -#       = fa_icon("eye")
+                      -#     %span= "View"
+                      %p.control
+                        - link to: item_path(@conn, :edit, item), class: "button is-small is-outlined is-info" do
+                          %span.icon.is-small
+                            = fa_icon("pencil")
+                          %span= "Edit"
+                      %p.control
+                        - link to: item_path(@conn, :delete, item.itemlist), method: :delete, data: [confirm: "Are you sure?"], class: "button is-small is-outlined is-danger" do
+                          %span.icon.is-small
+                            = fa_icon("trash")
+                          %span= "Delete"

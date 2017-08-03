@@ -5,6 +5,9 @@
         %strong= "Learnit"
         ="by"
         = link "Bitocreator", to: page_path(@conn, :index)
+        = " - "
+        = "© "
+        = DateTime.utc_now.year
       %p
         - link to: page_path(@conn, :index) do
           = img_tag static_path(@conn, "/images/logo.png")

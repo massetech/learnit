@@ -1,0 +1,12 @@
+- form_for @changeset, @action, fn f ->
+  = hidden_input f, :list_id
+  = hidden_input f, :item_id
+
+  - submit class: "button is-success is-outlined is-medium" do
+    = @item.dim0
+
+  -# .field.has-text-centered
+  -#   - submit class: "button is-small is-success is-outlined" do
+  -#     %span.icon.is-small
+  -#       = fa_icon("bookmark")
+  -#     %span= "GO ! :)"

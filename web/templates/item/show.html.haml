@@ -1,36 +1,36 @@
-%h2= "Show item"
-= link "Edit", to: item_path(@conn, :edit, @item)
-= link "Back", to: item_path(@conn, :index)
-
-%ul
-  %li
-    = "Classroom : "
-    = @item.topic.classroom.title
-  %li
-    = "Topic : "
-    = @item.topic.title
-  %li
-    = "Level : "
-    = @item.level
-  %li
-    = "Dim0 : "
-    = @item.dim0
-  %li
-    = "Dim1 : "
-    = @item.dim1
-  %li
-    = "Dim2 : "
-    = @item.dim2
-  %li
-    = "Dim3 : "
-    = @item.dim3
-  %li
-    = "Dim4 : "
-    = @item.dim4
-
-%h2= "Lists"
-= render "register_form.html", lists: @lists, item: @item, changeset: @changeset, conn: @conn, action: itemlist_path(@conn, :create)
-
-- for list <- @item.lists do
-  = link list.title, to: list_path(@conn, :show, list.id)
-  =# link "Remove", to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "btn btn-danger btn-xs"
+-# %h2= "Show item"
+-# = link "Edit", to: item_path(@conn, :edit, @item)
+-# = link "Back", to: item_path(@conn, :index)
+-#
+-# %ul
+-#   %li
+-#     = "Classroom : "
+-#     = @item.topic.classroom.title
+-#   %li
+-#     = "Topic : "
+-#     = @item.topic.title
+-#   %li
+-#     = "Level : "
+-#     = @item.level
+-#   %li
+-#     = "Dim0 : "
+-#     = @item.dim0
+-#   %li
+-#     = "Dim1 : "
+-#     = @item.dim1
+-#   %li
+-#     = "Dim2 : "
+-#     = @item.dim2
+-#   %li
+-#     = "Dim3 : "
+-#     = @item.dim3
+-#   %li
+-#     = "Dim4 : "
+-#     = @item.dim4
+-#
+-# %h2= "Lists"
+-# = render "register_form.html", lists: @lists, item: @item, changeset: @changeset, conn: @conn, action: itemlist_path(@conn, :create)
+-#
+-# - for list <- @item.lists do
+-#   = link list.title, to: list_path(@conn, :show, list.id)
+-#   =# link "Remove", to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "btn btn-danger btn-xs"

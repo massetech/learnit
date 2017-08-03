@@ -1,6 +1,5 @@
 defmodule Learnit.MemoryController do
   use Learnit.Web, :controller
-
   alias Learnit.Memory
 
   def index(conn, _params) do
