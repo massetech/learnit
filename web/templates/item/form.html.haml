@@ -1,0 +1,124 @@
+- form_for @changeset, @action, fn f ->
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Topic"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          %span.select
+            = select f, :topic_id, @topics
+          %span.icon.is-small.is-left
+            = fa_icon("lightbulb-o")
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Level"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          %span.select
+            = select f, :level, ["1", "2", "3"]
+          %span.icon.is-small.is-left
+            = fa_icon("graduation-cap")
+
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Dim0"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          = text_input f, :dim0, class: "input", placeholder: "Dim0"
+          %span.icon.is-small.is-left
+            = fa_icon("pencil")
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Dim1"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          = text_input f, :dim1, class: "input", placeholder: "Dim1"
+          %span.icon.is-small.is-left
+            = fa_icon("pencil")
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Dim2"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          = text_input f, :dim2, class: "input", placeholder: "Dim2"
+          %span.icon.is-small.is-left
+            = fa_icon("pencil")
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Dim3"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          = text_input f, :dim3, class: "input", placeholder: "Dim3"
+          %span.icon.is-small.is-left
+            = fa_icon("pencil")
+  .field.is-horizontal
+    .field-label.is-normal
+      %label.label= "Dim4"
+    .field-body
+      .field
+        %p.control.has-icons-left
+          = text_input f, :dim4, class: "input", placeholder: "Dim4"
+          %span.icon.is-small.is-left
+            = fa_icon("pencil")
+
+  .field.has-text-centered
+    - submit class: "button is-medium is-success is-outlined" do
+      %span.icon
+        = fa_icon("check")
+      %span= "Save"
+
+-# <%= form_for @changeset, @action, fn f -> %>
+-#   <%= if @changeset.action do %>
+-#     <div class="alert alert-danger">
+-#       <p>Oops, something went wrong! Please check the errors below.</p>
+-#     </div>
+-#   <% end %>
+-#
+-#   <div class="form-group">
+-#     <%= label f, :level, class: "control-label" %>
+-#     <%= select f, :level, ["1", "2", "3"], class: "form-control" %>
+-#     <%= error_tag f, :level %>
+-#   </div>
+-#
+-#   <div class="form-group">
+-#     <%= label f, :dim0, class: "control-label" %>
+-#     <%= text_input f, :dim0, class: "form-control" %>
+-#     <%= error_tag f, :dim0 %>
+-#   </div>
+-#
+-#   <div class="form-group">
+-#     <%= label f, :dim1, class: "control-label" %>
+-#     <%= text_input f, :dim1, class: "form-control" %>
+-#     <%= error_tag f, :dim1 %>
+-#   </div>
+-#
+-#   <div class="form-group">
+-#     <%= label f, :dim2, class: "control-label" %>
+-#     <%= text_input f, :dim2, class: "form-control" %>
+-#     <%= error_tag f, :dim2 %>
+-#   </div>
+-#
+-#   <div class="form-group">
+-#     <%= label f, :dim3, class: "control-label" %>
+-#     <%= text_input f, :dim3, class: "form-control" %>
+-#     <%= error_tag f, :dim3 %>
+-#   </div>
+-#
+-#   <div class="form-group">
+-#     <%= label f, :dim4, class: "control-label" %>
+-#     <%= text_input f, :dim4, class: "form-control" %>
+-#     <%= error_tag f, :dim4 %>
+-#   </div>
+-#
+-#   <div class="form-group">
+-#     <%= submit "Submit", class: "btn btn-primary" %>
+-#   </div>
+-#
+-#   <%= select f, :topic_id, @topics %>
+-#
+-# <% end %>

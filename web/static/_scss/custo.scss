@@ -1,0 +1,27 @@
+.bg-img {
+      background-image: url(/images/welcome-font.jpg) ;
+      background-position: center center;
+      background-repeat:  no-repeat;
+      background-attachment: fixed;
+      background-size:  cover;
+      background-color: #999;
+
+}
+
+footer img {width: 50px;}
+
+// Fix for sticky footer : https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+// Fix the center inside table
+.fix-centered {
+  justify-content: center !important;
+}

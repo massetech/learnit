@@ -1,4 +1,5 @@
 - form_for @changeset, @action, fn f ->
+
   .field
     %p.control.has-icons-left
       = select f, :classroom_id, @classrooms, class: "select"
@@ -7,6 +8,7 @@
       = text_input f, :title, class: "input", placeholder: "Title"
       %span.icon.is-small.is-left
         = fa_icon("pencil")
+
   .field.has-text-centered
     - submit class: "button is-medium is-success is-outlined" do
       %span.icon

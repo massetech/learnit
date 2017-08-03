@@ -1,27 +1,27 @@
-%h2
-  = "Classroom : "
-  = @list.classroom.title
-
-%h3
-  = "List : "
-  = @list.title
-%h5
-  = "There are "
-  = Enum.count(@list.users)
-  = " users learning this list..."
-
-
-= link "Back", to: list_path(@conn, :index)
-
-%hr
-%h4= "Items on the list :"
-- for item <- @list.items do
-  .item
-    %h5=# item.topic.title
-    %h5
-      = "Level : "
-      = item.level
-    %h5
-      = "Dim0 : "
-      = item.dim0
-    = link "Remove from list", to: itemlist_path(@conn, :delete, Enum.at(item.itemlists, 0).id, list_id: @list.id), method: :delete, class: "btn btn-danger btn-xs"
+-# %h2
+-#   = "Classroom : "
+-#   = @list.classroom.title
+-#
+-# %h3
+-#   = "List : "
+-#   = @list.title
+-# %h5
+-#   = "There are "
+-#   = Enum.count(@list.users)
+-#   = " users learning this list..."
+-#
+-#
+-# = link "Back", to: list_path(@conn, :index)
+-#
+-# %hr
+-# %h4= "Items on the list :"
+-# - for item <- @list.items do
+-#   .item
+-#     %h5=# item.topic.title
+-#     %h5
+-#       = "Level : "
+-#       = item.level
+-#     %h5
+-#       = "Dim0 : "
+-#       = item.dim0
+-#     = link "Remove from list", to: itemlist_path(@conn, :delete, Enum.at(item.itemlists, 0).id, list_id: @list.id), method: :delete, class: "btn btn-danger btn-xs"

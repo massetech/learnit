@@ -1,18 +1,48 @@
-%h2= "Listing topics"
-= link "New topic", to: topic_path(@conn, :new)
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Topics"
+          - link to: topic_path(@conn, :new), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("plus-circle")
+            %span= "New topic"
+        .column.is-8
 
-%table.table
-  %thead
-    %tr
-      %th= link "Classroom", to: classroom_path(@conn, :index)
-      %th= "Title"
+%section.hero
+  .hero-body
+    .container
+      .columns
+        .column.is-2
+        .column.is-8
+          %table.table
+            %thead
+              %tr
+                %th
+                  .content.has-text-centered= "Classroom"
+                %th
+                  .content.has-text-centered= "Title"
+                %th
+                  .content.has-text-centered= "Actions"
+            %tbody
+              - for topic <- @topics do
+                %tr
 
-  %tbody
-    - for topic <- @topics do
-      %tr
-        %th= topic.classroom.title
-        %th= topic.title
-        %td.text-right
-          =# link "Show", to: topic_path(@conn, :show, topic), class: "btn btn-default btn-xs"
-          = link "Edit", to: topic_path(@conn, :edit, topic), class: "btn btn-default btn-xs"
-          = link "Delete", to: topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+                  %td
+                    .content.has-text-centered= topic.classroom.title
+                  %td
+                    .content.has-text-centered= topic.title
+                  %td
+                    .field.is-grouped.fix-centered
+                      %p.control
+                        - link to: topic_path(@conn, :edit, topic), class: "button is-small is-outlined is-info" do
+                          %span.icon.is-small
+                            = fa_icon("pencil")
+                          %span= "Edit"
+                      %p.control
+                        - link to: topic_path(@conn, :delete, topic), method: :delete, data: [confirm: "Are you sure?"], class: "button is-small is-outlined is-danger" do
+                          %span.icon.is-small
+                            = fa_icon("trash")
+                          %span= "Delete"
+        .column.is-2

@@ -61,9 +61,12 @@ defmodule Learnit.ListController do
       {:ok, list} ->
         conn
         |> put_flash(:info, "List updated successfully.")
-        |> redirect(to: list_path(conn, :show, list))
+        |> redirect(to: list_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "edit.html", list: list, changeset: changeset)
+        #render(conn, "edit.html", list: list, changeset: changeset)
+        conn
+        |> put_flash(:alert, "List was not updated.")
+        |> redirect(to: list_path(conn, :index))
     end
   end
 

@@ -32,7 +32,9 @@ defmodule Learnit.Router do
     resources "/classrooms", ClassroomController
     resources "/topics", TopicController
     resources "/items", ItemController
-    resources "/lists", ListController
+    resources "/lists", ListController do
+      get "/manage", ItemController, :select
+    end
     resources "/memberships", MembershipController, only: [:create, :delete]
     get "mylists/test/:id", MembershipController, :show, as: :test
     get "mylists", MembershipController, :index, as: :mylists

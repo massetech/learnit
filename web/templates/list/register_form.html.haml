@@ -2,5 +2,11 @@
   .fields
     = hidden_input f, :list_id, value: @list_id
     = hidden_input f, :user_id, value: Coherence.current_user(@conn).id
-  .form-group
-    = submit "Learn", class: "btn btn-primary btn-xs"
+  -# .form-group
+  -#   = submit "Learn", class: "btn btn-primary btn-xs"
+
+  .field.has-text-centered
+    - submit class: "button is-small is-success is-outlined" do
+      %span.icon.is-small
+        = fa_icon("bookmark")
+      %span= "Learn"

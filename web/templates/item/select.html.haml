@@ -1,0 +1,27 @@
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Select items for '#{@list.title}'"
+          - link to: list_path(@conn, :index), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("arrow-left")
+            %span= "Back to lists"
+        .column.is-8
+
+%section.hero
+  .hero-body
+    .container
+      -# .columns.is-vcentered
+      -#   .column.is-1
+      -#   .column.is-10
+      - for item <- @items do
+        - if item.itemlists == [] do
+          = render Learnit.ItemlistView, "selection_form.html", changeset: item.new_itemlist, item: item, action: itemlist_path(@conn, :create)
+          -# - link to: itemlist_path(@conn, :create), method: :post, class: "button is-small is-outlined is-success" do
+        - else
+          - link to: itemlist_path(@conn, :delete, item.actual_itemlist, list_id: @list.id), method: :delete do
+            .button.is-success.is-medium
+              = item.dim0
+        -# .column.is-1

@@ -3,11 +3,11 @@
     .container
       .columns.is-vcentered
         .column.is-4
-          .title= "New item"
-          - link to: item_path(@conn, :index), class: "button is-primary is-outlined is-small" do
+          .title= "New classroom"
+          - link to: classroom_path(@conn, :index), class: "button is-primary is-outlined is-small" do
             %span.icon.is-small
               = fa_icon("arrow-left")
-            %span= "Back to items"
+            %span= "Back to classrooms"
         .column.is-8
 
 %section.hero
@@ -16,5 +16,5 @@
       .columns.is-vcentered
         .column.is-3
         .column.is-6
-          = render "form.html", changeset: @changeset, topics: @topics, action: item_path(@conn, :create)
+          = render "form.html", changeset: @changeset, action: classroom_path(@conn, :create)
         .column.is-3

@@ -42,7 +42,8 @@ defmodule Learnit.Mixfile do
      {:csv, "~> 2.0.0"},          # Converts csvs
      {:phoenix_haml, github: "chrismccord/phoenix_haml"}, # HAML
      {:phoenix_gon, "~> 0.2.0"}, # Loading variables in JS
-     {:rabbitElixir, "~> 1.0.0"} # Myanmar Zawgyi converter
+     {:rabbitElixir, "~> 1.0.0"}, # Myanmar Zawgyi converter
+     {:font_awesome_phoenix, "~> 0.1"} #Font awsome helpers
    ]
   end
 
