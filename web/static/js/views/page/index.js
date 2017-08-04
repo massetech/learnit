@@ -6,6 +6,9 @@ export default class View extends MainView {
 
     // Specific logic here
     console.log('PageIndexView mounted');
+    $("body").addClass("bg-img");
+    $("nav").removeClass("has-shadow").addClass("back-transparent");
+    $("footer").hide();
   }
 
   unmount() {
