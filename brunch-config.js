@@ -45,7 +45,8 @@ exports.config = {
     // Dependencies and current project directories to watch
     watched: [
       "web/static",
-      "test/static"
+      "test/static",
+      "node_modules/unpoly/dist/unpoly.min.js"
       // "node_modules/font-awesome/fonts/fontawesome-webfont.eot",
       // "node_modules/font-awesome/fonts/fontawesome-webfont.svg",
       // "node_modules/font-awesome/fonts/fontawesome-webfont.ttf",

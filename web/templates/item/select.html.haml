@@ -13,15 +13,15 @@
 %section.hero
   .hero-body
     .container
-      -# .columns.is-vcentered
-      -#   .column.is-1
-      -#   .column.is-10
-      - for item <- @items do
-        - if item.itemlists == [] do
-          = render Learnit.ItemlistView, "selection_form.html", changeset: item.new_itemlist, item: item, action: itemlist_path(@conn, :create)
-          -# - link to: itemlist_path(@conn, :create), method: :post, class: "button is-small is-outlined is-success" do
-        - else
-          - link to: itemlist_path(@conn, :delete, item.actual_itemlist, list_id: @list.id), method: :delete do
-            .button.is-success.is-medium
-              = item.dim0
-        -# .column.is-1
+      - for column <- @items do
+        .columns.is-multiline.is-centered.is-mobile
+          - for item <- column do
+            .column.is-narrow
+              %div{class: "item_<%= item.id%>"}
+                - if item.itemlists == [] do
+                  = render Learnit.ItemlistView, "selection_form.html", changeset: item.new_itemlist, item: item, action: itemlist_path(@conn, :create)
+                  -# - link to: itemlist_path(@conn, :create), method: :post, class: "button is-small is-outlined is-success" do
+                - else
+                  - link to: itemlist_path(@conn, :delete, item.actual_itemlist, list_id: @list.id), method: :delete, "up-target": dyn_class("item", item) do
+                    .button.is-success.is-medium
+                      = item.dim0

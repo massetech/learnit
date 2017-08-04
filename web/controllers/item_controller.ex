@@ -42,7 +42,10 @@ defmodule Learnit.ItemController do
         |> Repo.all()
         |> Repo.preload(itemlists: query_list)
         |> Enum.map(&add_changeset(&1, list_id)) # Loop through the items to add changesets if there is no itemlist yet
+        |> Enum.chunk(12, 12, []) # Chunk list in lists of 12
+        |> IO.inspect()
       render(conn, "select.html", items: items, list: list)
+      #IO.inspect(items)
     end
 
     defp add_changeset(item, list_id) do
@@ -54,7 +57,7 @@ defmodule Learnit.ItemController do
           actual = Enum.at(item.itemlists, 0) # Remove array
           item = %Item{item | actual_itemlist: actual}
       end
-      IO.inspect(item)
+      #IO.inspect(item)
     end
 
   def index(conn, _params) do
