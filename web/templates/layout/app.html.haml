@@ -10,7 +10,7 @@
     %title= 'Welcome to learnit !'
     %link(rel="stylesheet" href='#{static_path(@conn, "/css/app.css")}')
 
-  %body.site
+  %body.site(data-js-view-name="#{js_view_name(@conn, @view_template)}")
     -# %section.hero.is-fullheight2.bg-img2
     = render Learnit.LayoutView, "header.html", conn: @conn
     %main.site-content
