@@ -1,7 +1,7 @@
 defmodule Learnit.MembershipController do
   use Learnit.Web, :controller
-  alias Learnit.{Membership, Memory, List, Item}
-  require Logger
+  alias Learnit.{List, Classroom, User, Membership, Item, Topic, Itemlist}
+  #require Logger
   import PhoenixGon.Controller
 
   def index(conn, _params) do
@@ -10,8 +10,10 @@ defmodule Learnit.MembershipController do
     memberships =
       query
       |> Repo.all
-      |> Repo.preload([:list, :memorys])
-    render(conn, "index.html", memberships: memberships)
+      |> Repo.preload([list: [:classroom, :items]])
+      #|> Map.get(:list) # Get the lists only
+      |> IO.inspect
+    render(conn, "my_lists.html", memberships: memberships)
   end
 
   def show(conn, %{"id" => id}) do
@@ -47,7 +49,7 @@ defmodule Learnit.MembershipController do
         |> put_flash(:info, "Your list is now available.")
         |> redirect(to: list_path(conn, :index))
       {:error, membership_with_memories} ->
-        Logger.debug("Membership : failed to save membership")
+        #Logger.debug("Membership : failed to save membership")
         conn
         |> put_flash(:error, "Membership was not created.")
         |> redirect(to: list_path(conn, :index))

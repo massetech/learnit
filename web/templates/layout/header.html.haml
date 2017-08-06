@@ -12,12 +12,9 @@
         .navbar-item.has-dropdown.is-hoverable
           .navbar-link= Coherence.current_user(@conn).email
           .navbar-dropdown.is-boxed
-            = link "Admin", to: classroom_path(@conn, :index), class: "navbar-item"
             = link "My lists", to: mylists_path(@conn, :index), class: "navbar-item"
             %hr.navbar-divider
             = link "Log out", to: page_path(@conn, :index), class: "navbar-item"
-        .navbar-item
-          = link "See the lists", to: list_path(@conn, :index)
       .navbar-end
         .navbar-item
           = link "Classrooms", to: classroom_path(@conn, :index)

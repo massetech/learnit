@@ -1,6 +1,7 @@
 defmodule Learnit.ListController do
   use Learnit.Web, :controller
-  alias Learnit.{List, Classroom, AssociateList, User, Membership, Item, Topic, Itemlist}
+  alias Learnit.{List, Classroom, User, Membership, Item, Topic, Itemlist}
+  #AssociateList,
   plug :load_selects when action in [:new, :edit]
 
   def index(conn, _params) do
@@ -37,12 +38,10 @@ defmodule Learnit.ListController do
   end
 
   def show(conn, %{"id" => id}) do
-    #changeset = AssociateList.changeset(%AssociateList{})
-    #redirect conn, to: list_path(conn, :index)
     list = List
-      |> query_items(id)
       |> Repo.get(id)
-      |> Repo.preload([:classroom, :users])
+      #|> load_itemlists(list_id)
+      |> Repo.preload([:classroom, :users, items: :itemlists])
       |> IO.inspect()
     render(conn, "show.html", list: list)
   end
@@ -72,11 +71,7 @@ defmodule Learnit.ListController do
 
   def delete(conn, %{"id" => id}) do
     list = Repo.get!(List, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
     Repo.delete!(list)
-
     conn
     |> put_flash(:info, "List deleted successfully.")
     |> redirect(to: list_path(conn, :index))
@@ -87,15 +82,16 @@ defmodule Learnit.ListController do
     assign(conn, :classrooms, Repo.all(from(c in Classroom, select: {c.title, c.id})))
   end
 
-  defp query_items(_, id) do
+  defp load_itemlists(_, list_id) do
     # Check that there is at least one item linked to the list
-    case Repo.get_by(Itemlist, list_id: id) do
-      nil ->
+    itemlists = from(i in Itemlist, where: i.list_id == ^list_id)
+      |> Repo.all()
+    #case Repo.get(Itemlist, list_id: id) do
+    case itemlists do
+      nil ->  # There is no itemlist : preload items normaly
         from l in List,
-        # If not itemlist then preload items normaly
         preload: [:items]
-      _ ->
-        # Load query to get items and itemlists of the list
+      _ ->  # There is itemlist : preload items and itemlists
         from l in List,
         join: i in assoc(l, :items),
         join: il in assoc(l, :itemlists), on: il.list_id == l.id,

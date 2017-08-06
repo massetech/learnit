@@ -1,0 +1,4 @@
+- link to: membership_path(@conn, :delete, Enum.at(@list.memberships, 0).id), method: :delete, class: "button is-danger is-outlined is-small" do
+  %span.icon.is-small
+    = fa_icon("ban")
+  %span= "Remove"

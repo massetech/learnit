@@ -31,34 +31,44 @@ defmodule Learnit.ItemController do
     end
   end
 
-    def select(conn, %{"list_id" => list_id}) do
-      list = Repo.get!(List, list_id)
-      classroom = Repo.get!(Classroom, list.classroom_id)
-      list_id = list.id
-      query_list  = from l in Learnit.Itemlist, where: l.list_id == ^list_id  # Filter on the list's ID
-      items =
-        Item
-        #|> Item.with_classroom(classroom.id)
-        |> Repo.all()
-        |> Repo.preload(itemlists: query_list)
-        |> Enum.map(&add_changeset(&1, list_id)) # Loop through the items to add changesets if there is no itemlist yet
-        |> Enum.chunk(12, 12, []) # Chunk list in lists of 12
-        |> IO.inspect()
-      render(conn, "select.html", items: items, list: list)
-      #IO.inspect(items)
-    end
+  def display(conn, %{"list_id" => list_id}) do
+    list = Repo.get!(List, list_id)
+    query_list  = from l in Learnit.Itemlist, where: l.list_id == ^list_id  # Filter on the list's ID
+    items =
+      Item
+      |> Repo.all()
+      |> Repo.preload(itemlists: query_list)
+      |> Enum.chunk(12, 12, []) # Chunk list in lists of 12
+      |> IO.inspect()
+    render(conn, "display.html", items: items, list: list)
+  end
 
-    defp add_changeset(item, list_id) do
-      case Enum.count(item.itemlists) do
-        0 -> # There is no itemlists yet : we create the changeset
-          changeset = Itemlist.changeset(%Itemlist{}, %{item_id: item.id, list_id: list_id})
-          item = %Item{item | new_itemlist: changeset}
-        _ -> # There is already 1 itemlist : we load the actual itemlist
-          actual = Enum.at(item.itemlists, 0) # Remove array
-          item = %Item{item | actual_itemlist: actual}
-      end
-      #IO.inspect(item)
+  def select(conn, %{"list_id" => list_id}) do
+    list = Repo.get!(List, list_id)
+    classroom = Repo.get!(Classroom, list.classroom_id)
+    list_id = list.id
+    query_list  = from l in Learnit.Itemlist, where: l.list_id == ^list_id  # Filter on the list's ID
+    items =
+      Item
+      #|> Item.with_classroom(classroom.id)
+      |> Repo.all()
+      |> Repo.preload(itemlists: query_list)
+      |> Enum.map(&add_changeset(&1, list_id)) # Loop through the items to add changesets if there is no itemlist yet
+      |> Enum.chunk(12, 12, []) # Chunk list in lists of 12
+      |> IO.inspect()
+    render(conn, "select.html", items: items, list: list)
+  end
+
+  defp add_changeset(item, list_id) do
+    case Enum.count(item.itemlists) do
+      0 -> # There is no itemlists yet : we create the changeset
+        changeset = Itemlist.changeset(%Itemlist{}, %{item_id: item.id, list_id: list_id})
+        item = %Item{item | new_itemlist: changeset}
+      _ -> # There is already 1 itemlist : we load the actual itemlist
+        actual = Enum.at(item.itemlists, 0) # Remove array
+        item = %Item{item | actual_itemlist: actual}
     end
+  end
 
   def index(conn, _params) do
     items =

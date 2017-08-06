@@ -1,0 +1,58 @@
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title
+            = "My lists"
+          - link to: list_path(@conn, :index), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("list-ul")
+            %span= "All the lists"
+        .column.is-8
+
+%section.hero
+  .hero-body
+    .container
+      .columns
+        .column.is-2
+        .column.is-8
+          %table.table
+            %thead
+              %tr
+                %th
+                  .content.has-text-centered= "Classroom"
+                %th
+                  .content.has-text-centered= "Title"
+                %th
+                  .content.has-text-centered= "Items"
+                %th
+                  .content.has-text-centered= "% learned"
+                %th
+                  .content.has-text-centered= "Actions"
+            %tbody
+              - for membership <- @memberships do
+                %tr
+
+                  %td
+                    .content.has-text-centered= membership.list.classroom.title
+                  %td
+                    .content.has-text-centered= membership.list.title
+                  %td
+                    .content.has-text-centered= Enum.count(membership.list.items)
+                  %td
+                    .content.has-text-centered= "0%"
+                  %td
+                    .field.is-grouped.fix-centered
+                      %p.control
+                        - link to: list_item_path(@conn, :display, membership.list), class: "button is-small is-outlined is-primary" do
+                          %span.icon.is-small
+                            = fa_icon("eye")
+                          %span= "View"
+                      %p.control
+                        - link to: test_path(@conn, :show), class: "button is-small is-outlined is-info", target: "_blank" do
+                          %span.icon.is-small
+                            = fa_icon("graduation-cap")
+                          %span= "Test"
+                      =# render Learnit.MembershipView, "cancel_registration_btn.html", list: list, conn: @conn
+        .column.is-2

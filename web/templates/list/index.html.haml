@@ -8,6 +8,10 @@
             %span.icon.is-small
               = fa_icon("plus-circle")
             %span= "New list"
+          - link to: mylists_path(@conn, :index), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("list-ul")
+            %span= "My lists"
         .column.is-8
 
 %section.hero
@@ -42,18 +46,14 @@
                   %td
                     .content.has-text-centered
                       - if Enum.any?(list.users) do
-                        =# link "Remove", to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "btn btn-danger btn-xs"
-                        - link to: membership_path(@conn, :delete, Enum.at(list.memberships, 0).id), method: :delete, class: "button is-danger is-outlined is-small" do
-                          %span.icon.is-small
-                            = fa_icon("ban")
-                          %span= "Remove"
+                        = render Learnit.MembershipView, "cancel_registration_btn.html", list: list, conn: @conn
                       - else
                         = render "register_form.html", changeset: @changeset, list_id: list.id, conn: @conn, action: membership_path(@conn, :create)
 
                   %td
                     .field.is-grouped.fix-centered
                       %p.control
-                        - link to: list_path(@conn, :show, list), class: "button is-small is-outlined is-primary" do
+                        - link to: list_item_path(@conn, :display, list), class: "button is-small is-outlined is-primary" do
                           %span.icon.is-small
                             = fa_icon("eye")
                           %span= "View"

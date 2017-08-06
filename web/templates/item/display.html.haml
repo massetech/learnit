@@ -1,0 +1,23 @@
+%section.hero.is-primary.is-bold
+  .hero-body
+    .container
+      .columns.is-vcentered
+        .column.is-4
+          .title= "Item in '#{@list.title}'"
+          - link to: mylists_path(@conn, :index), class: "button is-primary is-outlined is-small" do
+            %span.icon.is-small
+              = fa_icon("arrow-left")
+            %span= "Back to my lists"
+        .column.is-8
+
+%section.hero
+  .hero-body
+    .container
+      - for column <- @items do
+        .columns.is-multiline.is-centered.is-mobile
+          - for item <- column do
+            .column.is-narrow
+              %div{class: "item_<%= item.id%>"}
+                .button.is-medium
+                  = item.dim0
+                  = item.level
