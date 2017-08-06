@@ -1,35 +1,40 @@
 defmodule Learnit.MembershipController do
   use Learnit.Web, :controller
   alias Learnit.{List, Classroom, User, Membership, Item, Topic, Itemlist}
-  #require Logger
   import PhoenixGon.Controller
 
+  #plug :query_user when action in [:index, :test]
+
   def index(conn, _params) do
-    user_id = Coherence.current_user(conn).id
-    query = from m in Learnit.Membership, where: m.user_id == ^user_id #Filter on user's memberships
     memberships =
-      query
+      query_user(conn, _params)
       |> Repo.all
       |> Repo.preload([list: [:classroom, :items]])
-      #|> Map.get(:list) # Get the lists only
-      |> IO.inspect
     render(conn, "my_lists.html", memberships: memberships)
   end
 
-  def show(conn, %{"id" => id}) do
-    memorys = Membership
-      |> Repo.get(id)
-      |> Repo.preload([:memorys])
-      |> Map.get(:memorys) # Get the list of memorys
-      |> Repo.preload([:item]) # Get the list of items
-      |> IO.inspect()
-      #conn = put_gon(conn, controller: items)
-      render(conn, "test.html", memorys: memorys)
+  def test(conn, _params) do
+    memberships =
+      query_user(conn, _params)
+      |> Repo.all
+      |> Repo.preload([list: [:classroom, :items]])
+    render(conn, "test.html", memberships: memberships)
   end
 
-  # def new(conn, _params) do
-  #   changeset = Membership.changeset(%Membership{})
-  #   render(conn, "new.html", changeset: changeset)
+  defp query_user(conn, _params) do
+    user_id = Coherence.current_user(conn).id
+    query = from m in Learnit.Membership, where: m.user_id == ^user_id #Filter on user's memberships
+  end
+
+  # def show(conn, %{"id" => id}) do
+  #   memorys = Membership
+  #     |> Repo.get(id)
+  #     |> Repo.preload([:memorys])
+  #     |> Map.get(:memorys) # Get the list of memorys
+  #     |> Repo.preload([:item]) # Get the list of items
+  #     |> IO.inspect()
+  #     #conn = put_gon(conn, controller: items)
+  #     render(conn, "test.html", memorys: memorys)
   # end
 
   def create(conn, %{"membership" => params}) do
