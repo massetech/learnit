@@ -18,6 +18,7 @@ defmodule Learnit.MembershipController do
       query_user(conn, _params)
       |> Repo.all
       |> Repo.preload([list: [:classroom, :items]])
+      |> IO.inspect()
     render(conn, "test.html", memberships: memberships)
   end
 
