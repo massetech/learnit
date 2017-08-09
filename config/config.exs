@@ -11,7 +11,8 @@ config :learnit,
 
 # Added to manage HAML
 config :phoenix, :template_engines,
-  haml: PhoenixHaml.Engine
+  haml: PhoenixHaml.Engine,
+  drab: Drab.Live.Engine
 
 # Configures the endpoint
 config :learnit, Learnit.Endpoint,

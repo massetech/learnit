@@ -1,9 +1,8 @@
 defmodule Learnit.MembershipController do
   use Learnit.Web, :controller
+  use Drab.Controller
   alias Learnit.{List, Classroom, User, Membership, Item, Topic, Itemlist}
   import PhoenixGon.Controller
-
-  #plug :query_user when action in [:index, :test]
 
   def index(conn, _params) do
     memberships =
@@ -13,14 +12,16 @@ defmodule Learnit.MembershipController do
     render(conn, "my_lists.html", memberships: memberships)
   end
 
-  def test(conn, _params) do
-    memberships =
-      query_user(conn, _params)
-      |> Repo.all
-      |> Repo.preload([list: [:classroom, :items]])
-      |> IO.inspect()
-    render(conn, "test.html", memberships: memberships)
-  end
+    def test(conn, _params) do
+      memberships =
+        query_user(conn, _params)
+        |> Repo.all
+        |> Poison.encode!()
+      conn
+        |> assign(:memberships, memberships)
+        |> put_gon(:memberships, memberships)
+        |> render "test.html"
+    end
 
   defp query_user(conn, _params) do
     user_id = Coherence.current_user(conn).id

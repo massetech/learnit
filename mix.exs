@@ -19,7 +19,7 @@ defmodule Learnit.Mixfile do
   def application do
     [mod: {Learnit, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :coherence]]
+                    :phoenix_ecto, :postgrex, :coherence, :drab]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,8 +42,9 @@ defmodule Learnit.Mixfile do
      {:csv, "~> 2.0.0"},          # Converts csvs
      {:phoenix_haml, github: "chrismccord/phoenix_haml"}, # HAML
      {:phoenix_gon, "~> 0.2.0"}, # Loading variables in JS
-     {:rabbitElixir, "~> 1.0.0"}, # Myanmar Zawgyi converter
-     {:font_awesome_phoenix, "~> 0.1"} #Font awsome helpers
+     #{:rabbitElixir, "~> 1.0.0"}, # Myanmar Zawgyi converter
+     {:font_awesome_phoenix, "~> 0.1"}, #Font awsome helpers
+     {:drab, "~> 0.5"}
    ]
   end
 
