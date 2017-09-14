@@ -11,8 +11,8 @@
     %link(rel="stylesheet" href='#{static_path(@conn, "/css/app.css")}')
 
   %body.site(data-js-view-name="#{js_view_name(@conn, @view_template)}")
-    = render Learnit.LayoutView, "header.html", conn: @conn
-    %main.site-content
+    =# render Learnit.LayoutView, "header.html", conn: @conn
+    .site-content
       = render Learnit.LayoutView, "flash.html", conn: @conn
       = render @view_module, @view_template, assigns
     = render Learnit.LayoutView, "footer.html", conn: @conn

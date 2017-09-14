@@ -3,6 +3,8 @@ defmodule Learnit.User do
   use Ecto.Schema
   use Coherence.Schema
 
+  #@derive {Poison.Encoder, only: [:name]}
+
   schema "users" do
     field :name, :string
     field :email, :string

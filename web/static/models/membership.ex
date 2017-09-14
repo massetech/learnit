@@ -1,8 +1,7 @@
 defmodule Learnit.Membership do
   use Learnit.Web, :model
 
-  @derive {Poison.Encoder, only: [:user_id, :list_id]}
-  #@derive {Poison.Encoder, except: [:__meta__]}
+  @derive {Poison.Encoder, only: [:list_id, :list, :memorys]}
 
   schema "memberships" do
     belongs_to :user, Learnit.User

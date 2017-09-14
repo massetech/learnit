@@ -2,6 +2,8 @@ defmodule Learnit.Item do
   use Learnit.Web, :model
   import Ecto.Query
 
+  @derive {Poison.Encoder, only: [:dim0, :dim1, :dim2, :dim3, :dim4]}
+
   schema "items" do
     field :level, :integer
     field :dim0, :string

@@ -1,3 +1,4 @@
-%flash.container
-  %p.alert.alert-info(role="alert")= get_flash(@conn, :info)
-  %p.alert.alert-danger(role="alert")= get_flash(@conn, :error)
+%section
+  %flash
+    %p.alert.alert-info(role="alert")= get_flash(@conn, :info)
+    %p.alert.alert-danger(role="alert")= get_flash(@conn, :error)

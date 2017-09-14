@@ -9,19 +9,21 @@ defmodule Learnit.MembershipController do
       query_user(conn, _params)
       |> Repo.all
       |> Repo.preload([list: [:classroom, :items]])
-    render(conn, "my_lists.html", memberships: memberships)
+    render conn, "my_lists.html", memberships: memberships
   end
 
-    def test(conn, _params) do
-      memberships =
-        query_user(conn, _params)
-        |> Repo.all
-        |> Poison.encode!()
-      conn
-        |> assign(:memberships, memberships)
-        |> put_gon(:memberships, memberships)
-        |> render "test.html"
-    end
+  def test(conn, _params) do
+    memberships =
+      query_user(conn, _params)
+      |> Repo.all
+      |> Repo.preload([:user, memorys: [:item], list: [:classroom]])
+    json =
+      memberships
+      |> Poison.encode!()
+    conn
+      |> put_gon(:memberships, json)
+      |> render("test.html", memberships: memberships)
+  end
 
   defp query_user(conn, _params) do
     user_id = Coherence.current_user(conn).id

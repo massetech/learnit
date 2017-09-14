@@ -1,6 +1,8 @@
 defmodule Learnit.Classroom do
   use Learnit.Web, :model
 
+  @derive {Poison.Encoder, only: [:title]}
+
   schema "classrooms" do
     field :title, :string
     has_many :topics, Learnit.Topic, on_delete: :delete_all
