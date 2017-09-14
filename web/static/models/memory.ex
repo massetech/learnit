@@ -1,6 +1,8 @@
 defmodule Learnit.Memory do
   use Learnit.Web, :model
 
+  @derive {Poison.Encoder, only: [:item, :id, :status]}
+
     schema "memorys" do
       field :status, :string
       belongs_to :membership, Learnit.Membership

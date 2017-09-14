@@ -13,6 +13,8 @@
 // to also remove its path from "config.paths.watched".
 import 'phoenix_html';
 import loadView from './views/loader';
+import "swiper";
+import "unpoly";
 
 function handleDOMContentLoaded() {
   // Get the current view name

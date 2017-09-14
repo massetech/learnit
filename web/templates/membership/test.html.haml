@@ -1,26 +1,100 @@
-.top
-  .menu
-  .title
-    %h4= "All"
-    %h4= "Connected"
-  .quit
-    %h1= "X"
--# .items
--#   - for memory <- @memorys do
--#     .item
--#       .question
--#         %h4= memory.item.dim0
--#       .answers
--#         %h4= memory.item.dim0
--#         %h4= memory.item.dim1
--#         %h4= memory.item.dim2
--#         %h4= memory.item.dim3
--#         %h4= memory.item.dim4
-.bottom
-  %ul
-    %li.minus
-    %li.pass
-    %li.plus
-
--# .app{data-variables: @memberships}
--# .app(data-variables="#{@memberships}")
+%nav.navbar.has-shadow
+  .navbar-brand
+    - link to: page_path(@conn, :index), class: "navbar-item", target: "_blank" do
+      = img_tag static_path(@conn, "/images/logo-text.png")
+  .navbar-menu
+    .navbar-end
+      .navbar-item.has-dropdown.is-hoverable
+        .navbar-link= Enum.at(@memberships, 0).list.title
+        .navbar-dropdown.is-boxed
+          - for membership <- @memberships do
+            %a.navbar-item
+              %span= membership.list.title
+      .navbar-item.has-dropdown.is-hoverable
+        .navbar-link
+          %span= "Level 0"
+        .navbar-dropdown.is-boxed
+          %a.navbar-item{id: "btn-level0"}
+            %span= "Level 0"
+          %a.navbar-item{id: "btn-level1"}
+            %span= "Level 1"
+          %a.navbar-item{id: "btn-level2"}
+            %span= "Level 2"
+          %a.navbar-item{id: "btn-level3"}
+            %span= "Level 3"
+          %hr.navbar-divider
+          %a.navbar-item{id: "btn-canceled"}
+            %span= "Canceled"
+      .navbar-item
+        .field.is-grouped
+          %p.control
+            %a.button.select-btn{id: "btn-dim0"}
+              %span= "DIM0"
+          %p.control
+            %a.button.select-btn{id: "btn-dim1"}
+              %span= "DIM1"
+          %p.control
+            %a.button.select-btn{id: "btn-dim2"}
+              %span= "DIM2"
+          %p.control
+            %a.button.select-btn{id: "btn-dim3"}
+              %span= "DIM3"
+          %p.control
+            %a.button.select-btn{id: "btn-dim4"}
+              %span= "DIM4"
+%section
+  .swiper-container.swiper-container-horizontal
+    .swiper-wrapper
+      .swiper-card-0.swiper-slide
+        .panel
+          .panel-block.show-btn
+            .question.has-text-centered
+              %h2.dim.is-size-1
+            .answer.has-text-centered
+              %h3.dim0.is-size-3
+              %h3.dim1.is-size-3
+              %h3.dim2.is-size-3
+              %h3.dim3.is-size-3
+              %h3.dim4.is-size-3
+      .swiper-card-1.swiper-slide
+        .panel
+          .panel-block.show-btn
+            .question.has-text-centered
+              %h2.dim.is-size-1
+            .answer.has-text-centered
+              %h3.dim0.is-size-3
+              %h3.dim1.is-size-3
+              %h3.dim2.is-size-3
+              %h3.dim3.is-size-3
+              %h3.dim4.is-size-3
+      .swiper-card-2.swiper-slide
+        .panel
+          .panel-block.show-btn
+            .question.has-text-centered
+              %h2.dim.is-size-1
+            .answer.has-text-centered
+              %h3.dim0.is-size-3
+              %h3.dim1.is-size-3
+              %h3.dim2.is-size-3
+              %h3.dim3.is-size-3
+              %h3.dim4.is-size-3
+    .swiper-button-prev.is-hidden-touch
+    .swiper-button-next.is-hidden-touch
+%section
+  .container.is-widescreen
+    .columns.has-text-centered
+      .column.is-3
+      .column.is-2
+        %a.button.is-primary.is-large.is-success
+          %span.icon.is-medium
+            %i.fa.fa-chevron-up
+          %span= "Move up"
+      .column.is-2
+        %a.button.is-primary.is-large.is-danger
+          %span= "Skip"
+      .column.is-2
+        %a.button.is-primary.is-large.is-warning
+          %span= "Move down"
+          %span.icon.is-medium
+            %i.fa.fa-chevron-down
+      .column.is-3

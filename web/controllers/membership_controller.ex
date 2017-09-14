@@ -1,25 +1,28 @@
 defmodule Learnit.MembershipController do
   use Learnit.Web, :controller
+  use Drab.Controller
   alias Learnit.{List, Classroom, User, Membership, Item, Topic, Itemlist}
   import PhoenixGon.Controller
-
-  #plug :query_user when action in [:index, :test]
 
   def index(conn, _params) do
     memberships =
       query_user(conn, _params)
       |> Repo.all
       |> Repo.preload([list: [:classroom, :items]])
-    render(conn, "my_lists.html", memberships: memberships)
+    render conn, "my_lists.html", memberships: memberships
   end
 
   def test(conn, _params) do
     memberships =
       query_user(conn, _params)
       |> Repo.all
-      |> Repo.preload([list: [:classroom, :items]])
-      |> IO.inspect()
-    render(conn, "test.html", memberships: memberships)
+      |> Repo.preload([:user, memorys: [:item], list: [:classroom]])
+    json =
+      memberships
+      |> Poison.encode!()
+    conn
+      |> put_gon(:memberships, json)
+      |> render("test.html", memberships: memberships)
   end
 
   defp query_user(conn, _params) do
